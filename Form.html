@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Resume Form</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+}
+
+input,textarea{
+width:80%;
+padding:10px;
+margin:10px;
+}
+
+button{
+padding:12px 20px;
+background:#007bff;
+color:white;
+border:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Fill Your Details</h2>
+
+<input id="name" placeholder="Full Name">
+
+<input id="email" placeholder="Email">
+
+<input id="phone" placeholder="Phone">
+
+<textarea id="skills" placeholder="Skills"></textarea>
+
+<textarea id="education" placeholder="Education"></textarea>
+
+<button onclick="saveData()">
+
+Submit
+
+</button>
+
+<script>
+
+function saveData(){
+
+localStorage.setItem("name",
+document.getElementById("name").value);
+
+localStorage.setItem("email",
+document.getElementById("email").value);
+
+localStorage.setItem("phone",
+document.getElementById("phone").value);
+
+localStorage.setItem("skills",
+document.getElementById("skills").value);
+
+localStorage.setItem("education",
+document.getElementById("education").value);
+
+window.location="resume.html";
+
+}
+
+</script>
+
+</body>
+</html>
