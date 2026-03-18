@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Your Resume</title>
+
+<style>
+
+body{
+font-family:Arial;
+}
+
+.resume{
+width:600px;
+margin:auto;
+background:white;
+padding:20px;
+box-shadow:0 0 10px gray;
+}
+
+button{
+padding:12px;
+background:#28a745;
+color:white;
+border:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="resume">
+
+<h1 id="name"></h1>
+
+<p id="email"></p>
+
+<p id="phone"></p>
+
+<h3>Skills</h3>
+
+<p id="skills"></p>
+
+<h3>Education</h3>
+
+<p id="education"></p>
+
+<button onclick="window.print()">
+
+Download PDF
+
+</button>
+
+</div>
+
+<script>
+
+document.getElementById("name").innerText =
+localStorage.getItem("name");
+
+document.getElementById("email").innerText =
+localStorage.getItem("email");
+
+document.getElementById("phone").innerText =
+localStorage.getItem("phone");
+
+document.getElementById("skills").innerText =
+localStorage.getItem("skills");
+
+document.getElementById("education").innerText =
+localStorage.getItem("education");
+
+</script>
+
+</body>
+</html>
