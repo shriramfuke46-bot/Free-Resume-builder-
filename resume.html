@@ -76,3 +76,38 @@ localStorage.getItem("education");
 
 </body>
 </html>
+if(t=="t9"){
+document.getElementById("resume").innerHTML = `
+<div style="padding:20px;font-family:Arial;border-top:8px solid #00BCD4;">
+<center>
+<img src="${localStorage.getItem("photo")}" width="100">
+<h2>${localStorage.getItem("name")}</h2>
+</center>
+
+<p>${localStorage.getItem("email")} | ${localStorage.getItem("phone")}</p>
+
+<h3 style="color:#00BCD4;">Skills</h3>
+<p>${localStorage.getItem("skills")}</p>
+
+<h3 style="color:#00BCD4;">Education</h3>
+<p>${localStorage.getItem("education")}</p>
+</div>`;
+}
+if(t=="t10"){
+document.getElementById("resume").innerHTML = `
+<div style="padding:20px;font-family:Arial;background:#fde4ec;">
+<center>
+<img src="${localStorage.getItem("photo")}" width="100">
+<h2 style="color:#E91E63;">${localStorage.getItem("name")}</h2>
+</center>
+
+<p>${localStorage.getItem("email")}</p>
+<p>${localStorage.getItem("phone")}</p>
+
+<h3>Skills</h3>
+<p>${localStorage.getItem("skills")}</p>
+
+<h3>Education</h3>
+<p>${localStorage.getItem("education")}</p>
+</div>`;
+}
