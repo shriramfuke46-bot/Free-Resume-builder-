@@ -5,11 +5,7 @@
 
 <style>
 
-body{
-font-family:Arial;
-background:#eee;
-margin:0;
-}
+body{font-family:Arial;background:#eee;margin:0;}
 
 .resume{
 width:800px;
@@ -18,29 +14,44 @@ background:white;
 padding:20px;
 }
 
-/* TEMPLATE 1 (Professional Top Header) */
+/* TEMPLATE 1 (Shine Style) */
 .t1 .header{
 text-align:center;
 color:white;
 padding:20px;
 }
 
-/* TEMPLATE 2 (Sidebar Style) */
-.t2{
-display:flex;
-}
-
+/* TEMPLATE 2 (Sidebar) */
+.t2{display:flex;}
 .t2 .left{
 width:30%;
 background:#2c3e50;
 color:white;
 padding:20px;
 }
-
 .t2 .right{
 width:70%;
 padding:20px;
 }
+
+/* TEMPLATE 3 (Minimal) */
+.t3 h1{border-bottom:2px solid #000;}
+
+/* TEMPLATE 4 (Box Style) */
+.t4 section{
+border:1px solid #ccc;
+padding:10px;
+margin:10px 0;
+}
+
+/* TEMPLATE 5 (Dark Mode) */
+.t5{
+background:#222;
+color:white;
+}
+
+/* TEMPLATE 6 (Two Column) */
+.t6{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 
 img{
 width:120px;
@@ -48,12 +59,11 @@ border-radius:50%;
 }
 
 button{
-margin:20px;
+margin-top:20px;
 padding:12px;
-background:#28a745;
+background:green;
 color:white;
 border:none;
-cursor:pointer;
 }
 
 </style>
@@ -61,17 +71,16 @@ cursor:pointer;
 
 <body>
 
-<div id="resume" class="resume"></div>
+<div id="resume" class="resume">
 
-<center>
+</div>
+
 <button onclick="downloadPDF()">Download PDF</button>
-</center>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
 <script>
 
-/* GET DATA */
 let t = localStorage.getItem("template");
 let name = localStorage.getItem("name");
 let email = localStorage.getItem("email");
@@ -81,10 +90,10 @@ let education = localStorage.getItem("education");
 let photo = localStorage.getItem("photo");
 let color = localStorage.getItem("color");
 
-/* TEMPLATE DESIGN */
 let html="";
 
-/* TEMPLATE 1 */
+/* TEMPLATE SWITCH */
+
 if(t=="t1"){
 html=`
 <div class="t1">
@@ -94,44 +103,106 @@ html=`
 <p>${email}</p>
 <p>${phone}</p>
 </div>
-
 <h3>Skills</h3>
 <p>${skills}</p>
-
 <h3>Education</h3>
 <p>${education}</p>
-
 </div>`;
 }
 
-/* TEMPLATE 2 */
 if(t=="t2"){
 html=`
 <div class="t2">
-
 <div class="left">
 <img src="${photo}">
 <h2>${name}</h2>
 <p>${email}</p>
 <p>${phone}</p>
 </div>
-
 <div class="right">
 <h3>Skills</h3>
 <p>${skills}</p>
-
 <h3>Education</h3>
 <p>${education}</p>
 </div>
-
 </div>`;
 }
 
-document.getElementById("resume").innerHTML = html;
+if(t=="t3"){
+html=`
+<div class="t3">
+<img src="${photo}">
+<h1>${name}</h1>
+<p>${email} | ${phone}</p>
+<hr>
+<h3>Skills</h3>
+<p>${skills}</p>
+<h3>Education</h3>
+<p>${education}</p>
+</div>`;
+}
+
+if(t=="t4"){
+html=`
+<div class="t4">
+<center><img src="${photo}"></center>
+<section>
+<h2>${name}</h2>
+<p>${email}</p>
+<p>${phone}</p>
+</section>
+<section>
+<h3>Skills</h3>
+<p>${skills}</p>
+</section>
+<section>
+<h3>Education</h3>
+<p>${education}</p>
+</section>
+</div>`;
+}
+
+if(t=="t5"){
+html=`
+<div class="t5">
+<center>
+<img src="${photo}">
+<h1>${name}</h1>
+<p>${email}</p>
+<p>${phone}</p>
+</center>
+<h3>Skills</h3>
+<p>${skills}</p>
+<h3>Education</h3>
+<p>${education}</p>
+</div>`;
+}
+
+if(t=="t6"){
+html=`
+<div class="t6">
+<div>
+<img src="${photo}">
+<h2>${name}</h2>
+<p>${email}</p>
+<p>${phone}</p>
+</div>
+<div>
+<h3>Skills</h3>
+<p>${skills}</p>
+<h3>Education</h3>
+<p>${education}</p>
+</div>
+</div>`;
+}
+
+document.getElementById("resume").innerHTML=html;
 
 /* PDF DOWNLOAD */
+
 function downloadPDF(){
 const element = document.getElementById("resume");
+
 html2pdf().from(element).save("resume.pdf");
 }
 
