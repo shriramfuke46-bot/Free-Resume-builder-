@@ -1,43 +1,81 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>Free Resume Builder</title>
+<title>Resume Builder</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 
 body{
+margin:0;
 font-family:Arial;
 background:#f5f7fa;
+}
+
+/* Header */
+header{
+background:linear-gradient(135deg,#1e3c72,#2a5298);
+color:white;
+padding:60px 20px;
 text-align:center;
 }
 
-header{
-background:#1e2a38;
-color:white;
-padding:40px;
+header h1{
+font-size:32px;
+margin-bottom:10px;
 }
 
-button{
-background:#007bff;
+header p{
+font-size:16px;
+opacity:0.9;
+}
+
+/* Button */
+.btn{
+background:#ff7b00;
 color:white;
-padding:15px 25px;
+padding:14px 25px;
 border:none;
-font-size:18px;
+border-radius:25px;
+font-size:16px;
 cursor:pointer;
+margin-top:20px;
 }
 
-.templates{
+.btn:hover{
+background:#ff5500;
+}
+
+/* Features */
+.features{
 display:flex;
+flex-wrap:wrap;
 justify-content:center;
 gap:20px;
-margin-top:30px;
+padding:30px;
 }
 
 .box{
 background:white;
+width:250px;
 padding:20px;
-width:200px;
-box-shadow:0 0 10px gray;
+text-align:center;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.box h3{
+margin-bottom:10px;
+}
+
+/* Footer */
+footer{
+text-align:center;
+padding:20px;
+background:#222;
+color:white;
 }
 
 </style>
@@ -47,17 +85,40 @@ box-shadow:0 0 10px gray;
 
 <header>
 
-<h1>Free Resume Builder</h1>
+<h1>Create Your Professional Resume</h1>
 
-<p>Create professional resumes in minutes</p>
+<p>Build modern resumes in just 2 minutes – 100% Free</p>
 
-<button onclick="location.href='templates.html'">
-
+<button class="btn" onclick="location.href='templates.html'">
 Create Resume
-
 </button>
 
 </header>
+
+<section class="features">
+
+<div class="box">
+<h3>⚡ Fast</h3>
+<p>Create resume in minutes</p>
+</div>
+
+<div class="box">
+<h3>🎨 Templates</h3>
+<p>Multiple professional designs</p>
+</div>
+
+<div class="box">
+<h3>📄 PDF Download</h3>
+<p>Download resume instantly</p>
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 Resume Builder | Free Tool</p>
+
+</footer>
 
 </body>
 </html>
