@@ -1,73 +1,127 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-
 <title>Resume Form</title>
 
 <style>
+body{font-family:Arial;text-align:center;}
 
-body{
-font-family:Arial;
-text-align:center;
-}
-
-input,textarea{
+input, textarea{
 width:80%;
+margin:8px;
 padding:10px;
-margin:10px;
 }
 
-button{
-padding:12px 20px;
-background:#007bff;
-color:white;
-border:none;
+.section{
+display:none;
 }
 
+img{
+width:100px;
+margin-top:10px;
+border-radius:50%;
+}
 </style>
-
 </head>
 
 <body>
 
 <h2>Fill Your Details</h2>
 
-<input id="name" placeholder="Full Name">
+<!-- BASIC -->
+<div id="basic" class="section">
+<h3>Basic Info</h3>
+<input id="name" placeholder="Full Name"><br>
+<input id="email" placeholder="Email"><br>
+<input id="phone" placeholder="Phone"><br>
+</div>
 
-<input id="email" placeholder="Email">
+<!-- PROFESSIONAL -->
+<div id="pro" class="section">
+<h3>Professional Info</h3>
+<textarea id="skills" placeholder="Skills"></textarea><br>
+<textarea id="education" placeholder="Education"></textarea><br>
+<textarea id="experience" placeholder="Experience"></textarea><br>
+</div>
 
-<input id="phone" placeholder="Phone">
+<!-- PREMIUM -->
+<div id="premium" class="section">
+<h3>Premium Details</h3>
+<input id="location" placeholder="Location"><br>
+<textarea id="objective" placeholder="Career Objective"></textarea><br>
+<textarea id="projects" placeholder="Projects"></textarea><br>
+</div>
 
-<textarea id="skills" placeholder="Skills"></textarea>
+<!-- PHOTO UPLOAD -->
+<h3>Upload Photo</h3>
+<input type="file" id="photo" accept="image/*"><br>
+<img id="preview">
 
-<textarea id="education" placeholder="Education"></textarea>
-
-<button onclick="saveData()">
-
-Submit
-
-</button>
+<br><br>
+<button onclick="saveData()">Generate Resume</button>
 
 <script>
 
+/* TEMPLATE CHECK */
+let t = localStorage.getItem("template");
+
+/* SHOW SECTIONS */
+if(t=="t1"){
+basic.style.display="block";
+}
+if(t=="t2"){
+basic.style.display="block";
+pro.style.display="block";
+}
+if(t=="t3"){
+basic.style.display="block";
+pro.style.display="block";
+premium.style.display="block";
+}
+
+/* PHOTO PREVIEW */
+photo.onchange = function(){
+let file = photo.files[0];
+let reader = new FileReader();
+
+reader.onload=function(){
+preview.src = reader.result;
+}
+if(file){
+reader.readAsDataURL(file);
+}
+}
+
+/* SAVE DATA */
 function saveData(){
 
-localStorage.setItem("name",
-document.getElementById("name").value);
+localStorage.setItem("name",name.value);
+localStorage.setItem("email",email.value);
+localStorage.setItem("phone",phone.value);
 
-localStorage.setItem("email",
-document.getElementById("email").value);
+localStorage.setItem("skills",skills?.value || "");
+localStorage.setItem("education",education?.value || "");
+localStorage.setItem("experience",experience?.value || "");
 
-localStorage.setItem("phone",
-document.getElementById("phone").value);
+localStorage.setItem("location",location?.value || "");
+localStorage.setItem("objective",objective?.value || "");
+localStorage.setItem("projects",projects?.value || "");
 
-localStorage.setItem("skills",
-document.getElementById("skills").value);
+/* PHOTO SAVE */
+let file = photo.files[0];
+let reader = new FileReader();
 
-localStorage.setItem("education",
-document.getElementById("education").value);
-
+reader.onload=function(){
+localStorage.setItem("photo",reader.result);
 window.location="resume.html";
+}
+
+if(file){
+reader.readAsDataURL(file);
+}else{
+window.location="resume.html";
+}
 
 }
 
