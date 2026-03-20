@@ -1,132 +1,198 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Select Template</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Premium Resume</title>
 
 <style>
-
 body{
-margin:0;
-font-family:Arial;
-background:#f5f7fa;
+  margin:0;
+  font-family:Arial;
+  background:#f2f2f2;
 }
 
 /* HEADER */
 .header{
-background:#1e3c72;
-color:white;
-text-align:center;
-padding:25px;
+  background:#374151;
+  color:white;
+  padding:30px;
+  display:flex;
+  align-items:center;
 }
 
-/* SECTION */
+.header img{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  margin-right:20px;
+  border:3px solid white;
+}
+
+.header h1{
+  margin:0;
+}
+
+/* MAIN */
+.container{
+  display:flex;
+  max-width:1000px;
+  margin:20px auto;
+  background:white;
+}
+
+/* LEFT SIDEBAR */
+.left{
+  width:30%;
+  background:#e5e7eb;
+  padding:20px;
+}
+
+.left h3{
+  border-bottom:2px solid gray;
+  padding-bottom:5px;
+}
+
+.left p{
+  font-size:14px;
+}
+
+/* RIGHT CONTENT */
+.right{
+  width:70%;
+  padding:20px;
+}
+
 .section{
-padding:20px;
+  margin-bottom:20px;
 }
 
 .section h2{
-margin-bottom:10px;
-color:#1e3c72;
+  border-bottom:2px solid #374151;
+  padding-bottom:5px;
 }
 
-/* GRID */
-.templates{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:15px;
+/* FORM */
+.form{
+  max-width:800px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  margin-top:20px;
+  border-radius:10px;
 }
 
-/* CARD */
-.card{
-background:white;
-border-radius:10px;
-overflow:hidden;
-box-shadow:0 3px 10px rgba(0,0,0,0.2);
-cursor:pointer;
-transition:0.3s;
+input, textarea{
+  width:100%;
+  padding:8px;
+  margin:5px 0;
 }
 
-.card:hover{
-transform:scale(1.05);
+button{
+  width:100%;
+  padding:10px;
+  background:#374151;
+  color:white;
+  border:none;
 }
-
-.card img{
-width:100%;
-height:250px;
-object-fit:cover;
-}
-
-.card h3{
-text-align:center;
-margin:10px;
-}
-
 </style>
+
 </head>
 
 <body>
 
+<!-- FORM -->
+<div class="form">
+<h2>Fill Resume</h2>
+
+<input type="file" id="photo">
+<input id="name" placeholder="Full Name">
+<input id="phone" placeholder="Phone">
+<input id="email" placeholder="Email">
+<input id="location" placeholder="Location">
+
+<textarea id="objective" placeholder="Career Objective"></textarea>
+<textarea id="skills" placeholder="Skills"></textarea>
+<textarea id="experience" placeholder="Experience"></textarea>
+<textarea id="education" placeholder="Education"></textarea>
+<textarea id="projects" placeholder="Projects"></textarea>
+
+<button onclick="gen()">Generate Resume</button>
+</div>
+
+<!-- RESUME -->
+<div id="resume" style="display:none;">
+
 <div class="header">
-<h1>Select Resume Template</h1>
-<p>Choose your category</p>
+<img id="img">
+<h1 id="rname"></h1>
 </div>
 
-<!-- 🔵 BASIC -->
+<div class="container">
+
+<!-- LEFT -->
+<div class="left">
+<h3>Contact</h3>
+<p id="rphone"></p>
+<p id="remail"></p>
+<p id="rlocation"></p>
+
+<h3>Skills</h3>
+<p id="rskills"></p>
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+
 <div class="section">
-<h2>Basic Templates</h2>
-
-<div class="templates">
-
-<!-- TEMPLATE ADD HERE -->
-<div class="card" onclick="selectTemplate('t1')">
-<img src="https://via.placeholder.com/300x400">
-<h3>Basic 1</h3>
+<h2>Career Objective</h2>
+<p id="robj"></p>
 </div>
 
-</div>
-</div>
-
-<!-- 🟢 PROFESSIONAL -->
 <div class="section">
-<h2>Professional Templates</h2>
-
-<div class="templates">
-
-<!-- TEMPLATE ADD HERE -->
-<div class="card" onclick="selectTemplate('t2')">
-<img src="https://i.imgur.com/8Km9tLL.png">
-<h3>Pro 1</h3>
+<h2>Experience</h2>
+<p id="rexp"></p>
 </div>
 
-</div>
-</div>
-
-<!-- 🟡 PREMIUM -->
 <div class="section">
-<h2>Premium Templates</h2>
+<h2>Education</h2>
+<p id="redu"></p>
+</div>
 
-<div class="templates">
-
-<!-- TEMPLATE ADD HERE -->
-<div class="card" onclick="selectTemplate('t3')">
-<img src="https://via.placeholder.com/300x400">
-<h3>Premium 1</h3>
+<div class="section">
+<h2>Projects</h2>
+<p id="rpro"></p>
 </div>
 
 </div>
+
+</div>
+
 </div>
 
 <script>
+function gen(){
 
-/* TEMPLATE SELECT */
-function selectTemplate(t){
-localStorage.setItem("template",t);
-window.location="form.html";
+resume.style.display="block";
+
+rname.innerText=name.value;
+rphone.innerText=phone.value;
+remail.innerText=email.value;
+rlocation.innerText=location.value;
+robj.innerText=objective.value;
+rskills.innerText=skills.value;
+rexp.innerText=experience.value;
+redu.innerText=education.value;
+rpro.innerText=projects.value;
+
+/* PHOTO */
+let file=photo.files[0];
+if(file){
+let reader=new FileReader();
+reader.onload=e=>img.src=e.target.result;
+reader.readAsDataURL(file);
 }
 
+}
 </script>
 
 </body>
