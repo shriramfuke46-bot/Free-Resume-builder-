@@ -2,97 +2,78 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Premium Resume</title>
+<title>Select Resume Template</title>
 
 <style>
 body{
   margin:0;
-  font-family:Arial;
-  background:#f2f2f2;
+  font-family:'Segoe UI';
+  background:#f1f5f9;
 }
 
 /* HEADER */
 .header{
-  background:#374151;
-  color:white;
+  text-align:center;
   padding:30px;
-  display:flex;
-  align-items:center;
-}
-
-.header img{
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  margin-right:20px;
-  border:3px solid white;
+  background:linear-gradient(135deg,#4f46e5,#9333ea);
+  color:white;
 }
 
 .header h1{
   margin:0;
 }
 
-/* MAIN */
+/* GRID */
 .container{
-  display:flex;
-  max-width:1000px;
-  margin:20px auto;
+  max-width:1100px;
+  margin:30px auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+/* CARD */
+.card{
   background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+  transition:0.3s;
 }
 
-/* LEFT SIDEBAR */
-.left{
-  width:30%;
-  background:#e5e7eb;
-  padding:20px;
+.card:hover{
+  transform:translateY(-5px);
 }
 
-.left h3{
-  border-bottom:2px solid gray;
-  padding-bottom:5px;
-}
-
-.left p{
-  font-size:14px;
-}
-
-/* RIGHT CONTENT */
-.right{
-  width:70%;
-  padding:20px;
-}
-
-.section{
-  margin-bottom:20px;
-}
-
-.section h2{
-  border-bottom:2px solid #374151;
-  padding-bottom:5px;
-}
-
-/* FORM */
-.form{
-  max-width:800px;
-  margin:auto;
-  background:white;
-  padding:20px;
-  margin-top:20px;
-  border-radius:10px;
-}
-
-input, textarea{
+/* IMAGE */
+.card img{
   width:100%;
-  padding:8px;
+  height:250px;
+  object-fit:cover;
+}
+
+/* CONTENT */
+.card-body{
+  padding:15px;
+}
+
+.card-body h3{
   margin:5px 0;
 }
 
-button{
-  width:100%;
-  padding:10px;
-  background:#374151;
+.btn{
+  display:block;
+  text-align:center;
+  background:#4f46e5;
   color:white;
-  border:none;
+  padding:10px;
+  border-radius:6px;
+  text-decoration:none;
+  margin-top:10px;
+}
+
+.btn:hover{
+  background:#3730a3;
 }
 </style>
 
@@ -100,100 +81,44 @@ button{
 
 <body>
 
-<!-- FORM -->
-<div class="form">
-<h2>Fill Resume</h2>
-
-<input type="file" id="photo">
-<input id="name" placeholder="Full Name">
-<input id="phone" placeholder="Phone">
-<input id="email" placeholder="Email">
-<input id="location" placeholder="Location">
-
-<textarea id="objective" placeholder="Career Objective"></textarea>
-<textarea id="skills" placeholder="Skills"></textarea>
-<textarea id="experience" placeholder="Experience"></textarea>
-<textarea id="education" placeholder="Education"></textarea>
-<textarea id="projects" placeholder="Projects"></textarea>
-
-<button onclick="gen()">Generate Resume</button>
-</div>
-
-<!-- RESUME -->
-<div id="resume" style="display:none;">
-
 <div class="header">
-<img id="img">
-<h1 id="rname"></h1>
+<h1>Choose Your Resume Template</h1>
+<p>Select a design to get started</p>
 </div>
 
 <div class="container">
 
-<!-- LEFT -->
-<div class="left">
-<h3>Contact</h3>
-<p id="rphone"></p>
-<p id="remail"></p>
-<p id="rlocation"></p>
-
-<h3>Skills</h3>
-<p id="rskills"></p>
+<!-- TEMPLATE 1 -->
+<div class="card">
+<img src="https://via.placeholder.com/400x500">
+<div class="card-body">
+<h3>Basic Template</h3>
+<p>Simple and clean layout</p>
+<a href="template1.html" class="btn">Use Template</a>
+</div>
 </div>
 
-<!-- RIGHT -->
-<div class="right">
-
-<div class="section">
-<h2>Career Objective</h2>
-<p id="robj"></p>
+<!-- TEMPLATE 2 -->
+<div class="card">
+<img src="https://via.placeholder.com/400x500">
+<div class="card-body">
+<h3>Professional Template</h3>
+<p>Balanced and modern</p>
+<a href="template2.html" class="btn">Use Template</a>
+</div>
 </div>
 
-<div class="section">
-<h2>Experience</h2>
-<p id="rexp"></p>
+<!-- TEMPLATE 3 -->
+<div class="card">
+<img src="https://via.placeholder.com/400x500">
+<div class="card-body">
+<h3>Premium Template</h3>
+<p>Stylish and advanced design</p>
+<a href="template3.html" class="btn">Use Template</a>
 </div>
-
-<div class="section">
-<h2>Education</h2>
-<p id="redu"></p>
-</div>
-
-<div class="section">
-<h2>Projects</h2>
-<p id="rpro"></p>
 </div>
 
 </div>
-
-</div>
-
-</div>
-
-<script>
-function gen(){
-
-resume.style.display="block";
-
-rname.innerText=name.value;
-rphone.innerText=phone.value;
-remail.innerText=email.value;
-rlocation.innerText=location.value;
-robj.innerText=objective.value;
-rskills.innerText=skills.value;
-rexp.innerText=experience.value;
-redu.innerText=education.value;
-rpro.innerText=projects.value;
-
-/* PHOTO */
-let file=photo.files[0];
-if(file){
-let reader=new FileReader();
-reader.onload=e=>img.src=e.target.result;
-reader.readAsDataURL(file);
-}
-
-}
-</script>
 
 </body>
 </html>
