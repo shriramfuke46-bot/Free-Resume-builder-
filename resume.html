@@ -76,3 +76,22 @@ localStorage.getItem("education");
 
 </body>
 </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<button onclick="downloadPDF()">Download Resume</button>
+</script>
+function downloadPDF(){
+
+const element = document.getElementById("resume");
+
+const opt = {
+  margin:       0,
+  filename:     'My_Resume.pdf',
+  image:        { type: 'jpeg', quality: 1 },
+  html2canvas:  { scale: 2 },
+  jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+};
+
+html2pdf().set(opt).from(element).save();
+
+}
+<div id="resume">
