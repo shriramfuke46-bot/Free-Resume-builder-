@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Resume Builder</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+body{font-family:Arial;background:#eef2f7;margin:0}
+
+/* FORM */
+.form{max-width:800px;margin:20px auto;background:#fff;padding:20px}
+input,textarea,select{width:100%;padding:8px;margin:5px 0}
+button{padding:10px;width:100%;margin-top:5px;background:#333;color:#fff;border:none}
+
+/* RESUME COMMON */
+#resume{display:none;margin:20px auto;background:#fff;max-width:900px}
+
+/* BASIC */
+.basic{padding:20px}
+
+/* PROPORTIONAL */
+.pro{display:flex}
+.left{width:40%;background:#f1f1f1;padding:15px}
+.right{width:60%;padding:15px}
+
+/* PREMIUM */
+.premium .header{background:#333;color:#fff;padding:20px;display:flex}
+.premium img{width:80px;height:80px;border-radius:50%;margin-right:10px}
+</style>
+
+</head>
+
+<body>
+
+<div class="form">
+
+<h2>Resume Builder</h2>
+
+<select id="template">
+<option value="basic">Basic</option>
+<option value="pro">Proportional</option>
+<option value="premium">Premium</option>
+</select>
+
+<input id="name" placeholder="Name">
+<input id="role" placeholder="Role">
+<input id="phone" placeholder="Phone">
+<input id="email" placeholder="Email">
+<input type="file" id="photo">
+
+<textarea id="skills" placeholder="Skills"></textarea>
+<textarea id="summary" placeholder="Summary"></textarea>
+
+<div id="expBox">
+<textarea class="exp" placeholder="Experience"></textarea>
+</div>
+
+<button onclick="addExp()">+ Add Experience</button>
+
+<textarea id="edu" placeholder="Education"></textarea>
+
+<button onclick="generate()">Generate Resume</button>
+<button onclick="downloadPDF()">Download PDF</button>
+
+</div>
+
+<!-- RESUME -->
+<div id="resume"></div>
+
+<script>
+
+function addExp(){
+let box=document.getElementById("expBox");
+let t=document.createElement("textarea");
+t.className="exp";
+t.placeholder="Experience";
+box.appendChild(t);
+}
+
+function generate(){
+
+let type=document.getElementById("template").value;
+let resume=document.getElementById("resume");
+
+let exps=document.querySelectorAll(".exp");
+let expHTML="";
+exps.forEach(e=>expHTML+="<p>"+e.value+"</p>");
+
+let html="";
+
+/* BASIC */
+if(type=="basic"){
+html=`
+<div class="basic">
+<h1>${name.value}</h1>
+<p>${role.value}</p>
+<h3>Summary</h3>
+<p>${summary.value}</p>
+<h3>Experience</h3>${expHTML}
+<h3>Education</h3><p>${edu.value}</p>
+</div>`;
+}
+
+/* PROPORTIONAL */
+if(type=="pro"){
+html=`
+<div class="pro">
+<div class="left">
+<h2>${name.value}</h2>
+<p>${role.value}</p>
+<p>${phone.value}</p>
+<p>${email.value}</p>
+<h3>Skills</h3><p>${skills.value}</p>
+</div>
+<div class="right">
+<h3>Summary</h3><p>${summary.value}</p>
+<h3>Experience</h3>${expHTML}
+<h3>Education</h3><p>${edu.value}</p>
+</div>
+</div>`;
+}
+
+/* PREMIUM */
+if(type=="premium"){
+html=`
+<div class="premium">
+<div class="header">
+<img id="pimg">
+<div>
+<h2>${name.value}</h2>
+<p>${role.value}</p>
+</div>
+</div>
+<div style="padding:15px">
+<h3>Skills</h3><p>${skills.value}</p>
+<h3>Experience</h3>${expHTML}
+</div>
+</div>`;
+}
+
+resume.innerHTML=html;
+resume.style.display="block";
+
+/* PHOTO */
+let file=document.getElementById("photo").files[0];
+if(file){
+let reader=new FileReader();
+reader.onload=e=>{
+let img=document.getElementById("pimg");
+if(img) img.src=e.target.result;
+};
+reader.readAsDataURL(file);
+}
+
+}
+
+/* PDF */
+function downloadPDF(){
+html2pdf().from(document.getElementById("resume")).save();
+}
+
+</script>
+
+</body>
+</html>
