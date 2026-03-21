@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Professional Resume</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI';
+  background:#eef2f7;
+}
+
+/* FORM */
+.form{
+  max-width:800px;
+  margin:20px auto;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+}
+
+input, textarea{
+  width:100%;
+  padding:10px;
+  margin:5px 0;
+}
+
+button{
+  width:100%;
+  padding:10px;
+  background:#4f46e5;
+  color:white;
+  border:none;
+}
+
+/* RESUME */
+.resume{
+  display:none;
+  max-width:900px;
+  margin:30px auto;
+  display:flex;
+  background:white;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* LEFT */
+.left{
+  width:40%;
+  background:#f1f5f9;
+  padding:20px;
+  text-align:center;
+}
+
+.left img{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.section{
+  margin-top:20px;
+  text-align:left;
+}
+
+.section h3{
+  border-bottom:2px solid #4f46e5;
+}
+
+/* RIGHT */
+.right{
+  width:60%;
+  padding:20px;
+}
+
+.item{
+  margin-bottom:15px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- FORM -->
+<div class="form">
+<h2>Fill Resume</h2>
+
+<input type="file" id="photo">
+<input id="name" placeholder="Name">
+<input id="role" placeholder="Role">
+<input id="phone" placeholder="Phone">
+<input id="email" placeholder="Email">
+<input id="location" placeholder="Location">
+
+<textarea id="summary" placeholder="Summary"></textarea>
+<textarea id="skills" placeholder="Skills"></textarea>
+<textarea id="experience" placeholder="Experience"></textarea>
+<textarea id="education" placeholder="Education"></textarea>
+
+<button onclick="generate()">Generate Resume</button>
+</div>
+
+<!-- RESUME -->
+<div class="resume" id="resume">
+
+<div class="left">
+<img id="img">
+
+<h2 id="rname"></h2>
+<p id="rrole"></p>
+
+<div class="section">
+<h3>Contact</h3>
+<p id="rphone"></p>
+<p id="remail"></p>
+<p id="rlocation"></p>
+</div>
+
+<div class="section">
+<h3>Skills</h3>
+<p id="rskills"></p>
+</div>
+
+</div>
+
+<div class="right">
+
+<div class="section">
+<h3>Summary</h3>
+<p id="rsummary"></p>
+</div>
+
+<div class="section">
+<h3>Experience</h3>
+<p id="rexperience"></p>
+</div>
+
+<div class="section">
+<h3>Education</h3>
+<p id="reducation"></p>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function generate(){
+
+document.getElementById("resume").style.display="flex";
+
+/* TEXT */
+rname.innerText = name.value;
+rrole.innerText = role.value;
+rphone.innerText = phone.value;
+remail.innerText = email.value;
+rlocation.innerText = location.value;
+rsummary.innerText = summary.value;
+rskills.innerText = skills.value;
+rexperience.innerText = experience.value;
+reducation.innerText = education.value;
+
+/* PHOTO */
+let file = photo.files[0];
+if(file){
+let reader = new FileReader();
+reader.onload = function(e){
+img.src = e.target.result;
+}
+reader.readAsDataURL(file);
+}
+
+}
+</script>
+
+</body>
+</html>
